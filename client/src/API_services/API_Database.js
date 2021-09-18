@@ -25,3 +25,9 @@ export const createEntry = (
     .then((data) => data.json())
     .then((userData) => userData);
 };
+
+export const findEntry = (nanoId) => {
+  return fetch(BASEURL + nanoId)
+    .then((data) => data.json())
+    .then((userData) => userData);
+};
