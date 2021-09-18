@@ -1,8 +1,8 @@
 const router = require("express").Router();
-const { createEntry, findOne } = require("./controller/controller")
+const { createEntry, getOne } = require("./controller/controller");
 
-router.post("", createEntry)
+router.post("", createEntry);
 
-router.get("/:nanoId", findOne)
+router.get("/:nanoId", getOne);
 
-module.exports = router
+module.exports = router;
