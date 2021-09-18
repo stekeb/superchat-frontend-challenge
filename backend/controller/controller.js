@@ -17,8 +17,6 @@ async function createEntry(req, res) {
     console.log(error);
     res.status(500);
   }
-
-  res.json("createentry");
 }
 
 async function getOne(req, res) {

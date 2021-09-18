@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from 'react';
-import { nanoid } from 'nanoid';
+import { React, useState, useEffect } from "react";
+import { createEntry } from "./API_services/API_Database";
+import { nanoid } from "nanoid";
 
 function Cardcreator(props) {
   const [nanoId, setNanoId] = useState("");
@@ -8,21 +9,28 @@ function Cardcreator(props) {
   const [backColor, setBackColor] = useState("#FFFFFF");
   const [frameColor, setFrameColor] = useState("#000000");
   const [icon, setIcon] = useState("empty");
-  
+  const [nanoIdDisplay, setNanoIdDisplay] = useState("");
+
   useEffect(() => {
-    setNanoId(nanoid())
-  },[])
+    setNanoId(nanoid());
+  }, [nanoIdDisplay]);
 
   async function submitEntry(e) {
     e.preventDefault();
-    console.log("button clicked")
-  }
 
+    const entry = await createEntry(
+      nanoId,
+      user,
+      repo,
+      backColor,
+      frameColor,
+      icon
+    );
+    setNanoIdDisplay(`URL to the Repository: ${entry.nanoId}`);
+  }
   return (
     <div>
-      <h1>CARDCREATOR</h1>
-
-      
+      <h1>Cardcreator</h1>
 
       <form className="entryForm" onSubmit={submitEntry}>
         <div className="entrysettings">
@@ -85,6 +93,9 @@ function Cardcreator(props) {
         </div>
       </form>
 
+      <div className="linkdiv">
+        {nanoIdDisplay ? <h2>{nanoIdDisplay}</h2> : null}
+      </div>
     </div>
   );
 }
