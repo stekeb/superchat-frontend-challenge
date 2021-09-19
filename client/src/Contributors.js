@@ -1,12 +1,11 @@
 import React from "react";
 
-function Contributors({item}) {
-
+function Contributors({ item }) {
   return (
-    <div>
-  <div>{item.login}</div>
-  </div>
-  )
+    <div className="singlecontributor">
+      <a href={item.html_url}>{`-> ${item.login} (${item.contributions})`}</a>
+    </div>
+  );
 }
 
 export default Contributors;

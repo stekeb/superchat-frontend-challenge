@@ -8,7 +8,7 @@ function Cardcreator(props) {
   const [repo, setRepo] = useState("Enter Repo");
   const [backColor, setBackColor] = useState("#FFFFFF");
   const [frameColor, setFrameColor] = useState("#000000");
-  const [icon, setIcon] = useState("empty");
+  const [icon, setIcon] = useState("URL to Icon");
   const [nanoIdDisplay, setNanoIdDisplay] = useState("");
 
   useEffect(() => {
@@ -29,7 +29,7 @@ function Cardcreator(props) {
     setNanoIdDisplay(`URL to the Repository: ${entry.nanoId}`);
   }
   return (
-    <div>
+    <div className="creatorcontainer">
       <h1>Cardcreator</h1>
 
       <form className="entryForm" onSubmit={submitEntry}>
@@ -74,6 +74,20 @@ function Cardcreator(props) {
           </div>
 
           <div className="textfield">
+            <label htmlFor="icontextfield"></label>
+            <input
+              className="textfield"
+              id="icontextfield"
+              onChange={(e) => {
+                setIcon(e.target.value);
+              }}
+              value={icon}
+              type="text"
+              placeholder=""
+            />
+          </div>
+
+          <div className="textfield">
             <label htmlFor="repotextfield"></label>
             <input
               className="textfield"
@@ -95,6 +109,13 @@ function Cardcreator(props) {
 
       <div className="linkdiv">
         {nanoIdDisplay ? <h2>{nanoIdDisplay}</h2> : null}
+      </div>
+
+      <div className="outer" style={{ backgroundColor: frameColor }}>
+        <h3>outer</h3>
+        <div className="inner">
+          <h1>inner</h1>
+        </div>
       </div>
     </div>
   );
