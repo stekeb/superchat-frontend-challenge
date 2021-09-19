@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Contributors from "./Contributors";
+import GitHubButton from "react-github-btn";
 
 import { findEntry } from "./API_services/API_Database";
 import { findRepo, findContributors } from "./API_services/API_Github";
@@ -59,7 +60,19 @@ function Card(props) {
           >
             <a href={repoDataState.html_url}>{userDataState.repo}</a>
           </div>
-          <div className="headeruser"> by {userDataState.user}</div>
+          <div className="headeruser">
+            {" "}
+            by {userDataState.user}{" "}
+            <div className="starbutton">
+              <GitHubButton
+                href={`https://github.com/${userDataState.user}/${userDataState.repo}`}
+                data-icon="octicon-star"
+                data-size="large"
+              >
+                Star
+              </GitHubButton>
+            </div>
+          </div>
         </div>
       </div>
       <div className="description">{repoDataState.description}</div>

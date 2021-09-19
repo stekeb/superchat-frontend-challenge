@@ -31,56 +31,57 @@ function Cardcreator(props) {
   }
   return (
     <div className="creatorcontainer" style={{ backgroundColor: frameColor }}>
-    <div className="cardcreatorheader" style={{ backgroundColor: backColor }}> Github Link Generator</div>
+      <div className="cardcreatorheader" style={{ backgroundColor: backColor }}>
+        {" "}
+        Github Link Generator
+      </div>
 
       <form className="entryform" onSubmit={submitEntry}>
         <div className="entrysettings">
           <div className="colorpickerscontainer">
-          <div className="colorpicker">
-            <div>
-            <label htmlFor="backgroundcolor">Header color: </label>
+            <div className="colorpicker">
+              <div>
+                <label htmlFor="backgroundcolor">Header color: </label>
+              </div>
+              <div>
+                <input
+                  type="color"
+                  id="backgroundcolor"
+                  name="backgroundcolor"
+                  onChange={(e) => {
+                    setBackColor(e.target.value);
+                  }}
+                  value={backColor}
+                ></input>
+              </div>
             </div>
-            <div>
-            <input
-              type="color"
-              id="backgroundcolor"
-              name="backgroundcolor"
-              onChange={(e) => {
-                setBackColor(e.target.value);
-              }}
-              value={backColor}
-            ></input>
+            <div className="colorpicker">
+              <label htmlFor="frameColor">Frame color: </label>
+              <input
+                type="color"
+                id="frameColor"
+                name="frameColor"
+                onChange={(e) => {
+                  setFrameColor(e.target.value);
+                }}
+                value={frameColor}
+              ></input>
+            </div>
+
+            <div className="textfield">
+              <label htmlFor="usertextfield"></label>
+              <input
+                className="textfield"
+                id="usertextfield"
+                onChange={(e) => {
+                  setUser(e.target.value);
+                }}
+                value={user}
+                type="text"
+                placeholder="Enter User Name"
+              />
             </div>
           </div>
-          <div className="colorpicker">
-            <label htmlFor="frameColor">Frame color: </label>
-            <input
-              type="color"
-              id="frameColor"
-              name="frameColor"
-              onChange={(e) => {
-                setFrameColor(e.target.value);
-              }}
-              value={frameColor}
-            ></input>
-          </div>
-
-          <div className="textfield">
-            <label htmlFor="usertextfield"></label>
-            <input
-              className="textfield"
-              id="usertextfield"
-              onChange={(e) => {
-                setUser(e.target.value);
-              }}
-              value={user}
-              type="text"
-              placeholder="Enter User Name"
-            />
-          </div>
-          </div>
-
-          
 
           <div className="textfield">
             <label htmlFor="repotextfield"></label>
@@ -109,16 +110,17 @@ function Cardcreator(props) {
             />
           </div>
           <div className="buttoncontainer">
-          <button className="entryformbutton" type="submit">
-            Generate Link
-          </button>
+            <button className="entryformbutton" type="submit">
+              Generate Link
+            </button>
           </div>
-  
         </div>
       </form>
 
       <div className="linkdiv">
-        {nanoIdDisplay ? <div className="linkdivdisplay">{nanoIdDisplay}</div> : null}
+        {nanoIdDisplay ? (
+          <div className="linkdivdisplay">{nanoIdDisplay}</div>
+        ) : null}
       </div>
     </div>
   );
