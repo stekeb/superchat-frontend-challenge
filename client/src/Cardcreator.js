@@ -1,14 +1,15 @@
 import { React, useState, useEffect } from "react";
 import { createEntry } from "./API_services/API_Database";
 import { nanoid } from "nanoid";
+const SCURL = process.env.REACT_APP_SCURL;
 
 function Cardcreator(props) {
   const [nanoId, setNanoId] = useState("");
-  const [user, setUser] = useState("Enter User Name");
-  const [repo, setRepo] = useState("Enter Repo");
-  const [backColor, setBackColor] = useState("#FFFFFF");
-  const [frameColor, setFrameColor] = useState("#000000");
-  const [icon, setIcon] = useState("URL to Icon");
+  const [user, setUser] = useState("");
+  const [repo, setRepo] = useState("");
+  const [backColor, setBackColor] = useState("#2596be");
+  const [frameColor, setFrameColor] = useState("#eeeee4");
+  const [icon, setIcon] = useState("");
   const [nanoIdDisplay, setNanoIdDisplay] = useState("");
 
   useEffect(() => {
@@ -26,16 +27,20 @@ function Cardcreator(props) {
       frameColor,
       icon
     );
-    setNanoIdDisplay(`URL to the Repository: ${entry.nanoId}`);
+    setNanoIdDisplay(`URL to the Repository: ${SCURL}${entry.nanoId}`);
   }
   return (
-    <div className="creatorcontainer">
-      <h1>Cardcreator</h1>
+    <div className="creatorcontainer" style={{ backgroundColor: frameColor }}>
+    <div className="cardcreatorheader" style={{ backgroundColor: backColor }}> Github Link Generator</div>
 
-      <form className="entryForm" onSubmit={submitEntry}>
+      <form className="entryform" onSubmit={submitEntry}>
         <div className="entrysettings">
+          <div className="colorpickerscontainer">
           <div className="colorpicker">
-            <label htmlFor="backgroundcolor">Background color: </label>
+            <div>
+            <label htmlFor="backgroundcolor">Header color: </label>
+            </div>
+            <div>
             <input
               type="color"
               id="backgroundcolor"
@@ -45,6 +50,7 @@ function Cardcreator(props) {
               }}
               value={backColor}
             ></input>
+            </div>
           </div>
           <div className="colorpicker">
             <label htmlFor="frameColor">Frame color: </label>
@@ -69,23 +75,12 @@ function Cardcreator(props) {
               }}
               value={user}
               type="text"
-              placeholder=""
+              placeholder="Enter User Name"
             />
+          </div>
           </div>
 
-          <div className="textfield">
-            <label htmlFor="icontextfield"></label>
-            <input
-              className="textfield"
-              id="icontextfield"
-              onChange={(e) => {
-                setIcon(e.target.value);
-              }}
-              value={icon}
-              type="text"
-              placeholder=""
-            />
-          </div>
+          
 
           <div className="textfield">
             <label htmlFor="repotextfield"></label>
@@ -97,25 +92,33 @@ function Cardcreator(props) {
               }}
               value={repo}
               type="text"
-              placeholder=""
+              placeholder="Enter Repo"
             />
           </div>
-
+          <div className="textfield">
+            <label htmlFor="icontextfield"></label>
+            <input
+              className="textfield"
+              id="icontextfield"
+              onChange={(e) => {
+                setIcon(e.target.value);
+              }}
+              value={icon}
+              type="text"
+              placeholder="URL for Icon"
+            />
+          </div>
+          <div className="buttoncontainer">
           <button className="entryformbutton" type="submit">
             Generate Link
           </button>
+          </div>
+  
         </div>
       </form>
 
       <div className="linkdiv">
-        {nanoIdDisplay ? <h2>{nanoIdDisplay}</h2> : null}
-      </div>
-
-      <div className="outer" style={{ backgroundColor: frameColor }}>
-        <h3>outer</h3>
-        <div className="inner">
-          <h1>inner</h1>
-        </div>
+        {nanoIdDisplay ? <div className="linkdivdisplay">{nanoIdDisplay}</div> : null}
       </div>
     </div>
   );
